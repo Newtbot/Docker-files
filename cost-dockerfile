@@ -1,0 +1,17 @@
+FROM python:3.8 
+
+
+WORKDIR /app
+
+COPY . . 
+
+RUN apt-get update 
+RUN python -m pip install --upgrade pip  
+RUN pip3 install -r dependencies.txt 
+RUN apt-get install mosquitto mosquitto-clients -y 
+RUN find / -xdev -perm /6000 -type f -exec chmod a-s {} \; || true
+ 
+
+EXPOSE 1883 443 
+
+CMD ["python3", "receiver.py"]
