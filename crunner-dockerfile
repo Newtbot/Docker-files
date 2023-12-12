@@ -1,0 +1,11 @@
+FROM ubuntu
+
+WORKDIR /app
+
+COPY crunner .
+
+RUN cp /app/crunner /usr/local/bin/
+
+EXPOSE 15000
+
+CMD [ "/usr/local/bin/crunner" ]
